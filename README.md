@@ -1,5 +1,5 @@
 # CodeSamples
-Please hire me c:
+I took some of the more interesting scripts from my projects and organized them in this repository.
 
 These samples are from my current project, a 20 person multiplayer battle royale game Gauntlet.  
 Each player gets dropped in a neo-tokyo city and has to find characters to add to his or her character inventory. Each player can only have one character active at once, but can switch characters easily. Each character has a special move that can combo with other characters' special moves.
