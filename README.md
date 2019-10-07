@@ -4,7 +4,7 @@ I took some of the more interesting scripts from my projects and organized them 
 These samples are from my current project, a 20 person multiplayer battle royale game Gauntlet.  
 Each player gets dropped in a neo-tokyo city and has to find characters to add to his or her character inventory. Each player can only have one character active at once, but can switch characters easily. Each character has a special move that can combo with other characters' special moves.
 
-In the folder you will find the following:
+In the Gauntlet2 folder you will find the following:
 
 Base Character Script: Inherited by all characters.
 
@@ -22,6 +22,16 @@ GameCharacterLibrary: Contains all the characters in the game, so a player can c
 
 SwitchID: static class that contains the IDs for characters, passive items, character stats, and crowd control so classes can easily and clearly interact.
 
+
+In the ViViD AI folder you will find the following:
+
+Zombie is an abstract class that has a basic AI finite state machine written into it. It will wander around aimlessly until it finds a player in certain radius of sight, then start following the player.
+
+Basic Zombie inherits the Zombie class and has the added function of attacking when the player is in range.
+
+Fast Zombie inherits the basic Zombie class and will jump onto a player if he or she is in range. The zombie explodes on collision with the player.
+
+Boid and flockcontroller implement the boid algorithm to create a flocking mentality between AI so certain types of zombies form groups.
 
 
 
