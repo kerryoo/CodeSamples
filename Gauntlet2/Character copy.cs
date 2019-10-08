@@ -10,6 +10,7 @@ public abstract class Character : MonoBehaviour
     protected const float AIRSTRAFING_SCALE = 0.1f;
     protected const float MIN_JUMP_INTERVAL = 0.25f;
 
+    protected MasterPlayer _masterPlayer;
     protected InputControl _inputControl;
     protected Transform _transform;
     protected CharacterState _currCharacterState;
@@ -20,6 +21,7 @@ public abstract class Character : MonoBehaviour
 
     //fields for jumping logic
     protected bool _isGrounded;
+    protected bool _jumped;
     protected bool _canDoubleJump;
     protected float _jumpTimeStamp;
     protected List<Collider> _collisions = new List<Collider>();
@@ -34,10 +36,16 @@ public abstract class Character : MonoBehaviour
     //the fields we can't preset are the inputControl and transform, since they're unique
     //to each player. When a player gets the character, the inputControl and player's transform
     //will be assigned.
-    public void prepareCharacter(InputControl inputControl, Transform passedTransform)
+    public void prepareCharacter(MasterPlayer masterPlayer, InputControl inputControl, Transform passedTransform)
     {
+        _masterPlayer = masterPlayer;
         _inputControl = inputControl;
         _transform = passedTransform;
+    }
+
+    public void setCharacterStats(CharacterStats characterStats)
+    {
+        _characterStats = characterStats;
     }
 
     //Some activities need to be handled even when the character is not active.
@@ -47,9 +55,11 @@ public abstract class Character : MonoBehaviour
     public abstract void addExperience();
     public abstract int getID();
     protected abstract void rankUp();
+    protected abstract void basicAttack();
+    protected abstract void specialMove();
 
     //Called in MasterPlayer when the player switches character.
-    public void setCharacterActive(bool active)
+    public virtual void setCharacterActive(bool active)
     {
         _characterObject.SetActive(active);
     }
@@ -60,6 +70,7 @@ public abstract class Character : MonoBehaviour
     protected void handleInput()
     {
         _currCharacterState.handleInput();
+        _jumped = false;
     }
 
     //called in the walking state to move the character.
@@ -106,12 +117,14 @@ public abstract class Character : MonoBehaviour
             _animator.SetBool("Grounded", false);
             _animator.SetTrigger("Jump");
 
+            _jumped = true;
             _canDoubleJump = true;
             return true;
         }
 
         if (_canDoubleJump && !_isGrounded)
         {
+            _jumped = true;
             _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
             _rigidbody.AddForce(Vector3.up * _characterStats.JumpForce, ForceMode.Impulse);
             _animator.SetTrigger("Jump");

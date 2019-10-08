@@ -22,6 +22,9 @@ GameCharacterLibrary: Contains all the characters in the game, so a player can c
 
 SwitchID: static class that contains the IDs for characters, passive items, character stats, and crowd control so classes can easily and clearly interact.
 
+CameraControl: Controls camera logic for the player
+
+FerroMagneticPulse: Projectile that locks onto a player and nudges the projectile towards him or her.
 
 In the ViViD AI folder you will find the following:
 

@@ -21,7 +21,7 @@ public class GameManager
                 _instance._gameCharacterLibrary.AssembleLibrary();
 
                 _instance.gameObject.AddComponent<GamePassiveItemLibrary>();
-                _instance._gamePassiveItemLibrary.DecodeJSON();
+                _instance._gamePassiveItemLibrary.AssembleLibrary();
             }
             return _instance;
         }
@@ -53,5 +53,26 @@ public class GameManager
         }
     }
 
+    public CharacterStats getStatsClone(CharacterStats orig)
+    {
+        CharacterStats characterStats = new CharacterStats();
 
+        characterStats.CHARACTER_ID = orig.CHARACTER_ID;
+        characterStats.MaxHealth = orig.MaxHealth;
+        characterStats.HealthRemaining = characterStats.MaxHealth;
+
+        characterStats.MaxEnergy = orig.MaxEnergy;
+        characterStats.EnergyRemaining = characterStats.MaxEnergy;
+        characterStats.EnergyRegen = orig.EnergyRegen;
+        characterStats.ShootEnergyCost = orig.ShootEnergyCost;
+        characterStats.SpecialMovementCost = orig.SpecialMovementCost;
+        characterStats.ShieldEnergyRate = orig.ShieldEnergyRate;
+
+        characterStats.RateOfFire = orig.RateOfFire;
+        characterStats.DamageDealt = orig.DamageDealt;
+        characterStats.MovementSpeed = orig.MovementSpeed;
+        characterStats.JumpForce = orig.JumpForce;
+
+        return characterStats;
+    }
 }

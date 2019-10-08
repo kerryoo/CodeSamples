@@ -7,6 +7,7 @@ public static class SwitchID
     public const int StateBuffer = 1000;
     public const int CrowdControlBuffer = 2000;
     public const int CharacterBuffer = 3000;
+    public const int ObjectBuffer = 4000;
 
     public enum PossibleStates
     {
@@ -60,4 +61,11 @@ public static class SwitchID
     public const int Cairne = CharacterBuffer + (int)CharacterID.Cairne;
     public const int XJTen = CharacterBuffer + (int)CharacterID.XJTen;
     public const int Terra = CharacterBuffer + (int)CharacterID.Terra;
+
+    public enum CharacterObjects
+    {
+        LuteceClone
+    }
+
+    public const int LuteceClone = CharacterBuffer + (int)CharacterObjects.LuteceClone;
 }
