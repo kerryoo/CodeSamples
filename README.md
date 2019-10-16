@@ -1,9 +1,6 @@
 # CodeSamples
 I took some of the more interesting scripts from my projects and organized them in this repository.
 
-These samples are from my current project, a 20 person multiplayer battle royale game Gauntlet.  
-Each player gets dropped in a neo-tokyo city and has to find characters to add to his or her character inventory. Each player can only have one character active at once, but can switch characters easily. Each character has a special move that can combo with other characters' special moves.
-
 In the Gauntlet2 folder you will find the following:
 
 Base Character Script: Inherited by all characters.
@@ -26,6 +23,7 @@ CameraControl: Controls camera logic for the player
 
 FerroMagneticPulse: Projectile that locks onto a player and nudges the projectile towards him or her.
 
+
 In the ViViD AI folder you will find the following:
 
 Zombie is an abstract class that has a basic AI finite state machine written into it. It will wander around aimlessly until it finds a player in certain radius of sight, then start following the player.
@@ -37,4 +35,9 @@ Fast Zombie inherits the basic Zombie class and will jump onto a player if he or
 Boid and flockcontroller implement the boid algorithm to create a flocking mentality between AI so certain types of zombies form groups.
 
 
+In the ViViD Data Processing Folder you will find the following:
+
+UserData: Contains listeners for game start, level completed, death, and using special abilities event. When the level begins, the player's current position and timestamp relative to the level start time is recorded every ten seconds. On completion of the level, a file containing those positions, the amount of time the player took to complete the level, and the amount of times the player died and used his or her special ability is uploaded to a MySQL database. There is also a PHP file that contributes to this functionality called playerdata.
+
+Register/Login: Sends a query through their respective php files to the MySQL database containing registered users  to either register or log in a player.
 
