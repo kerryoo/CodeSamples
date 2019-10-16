@@ -42,6 +42,7 @@ public class UserData : MonoBehaviour
     private void OnDeath()
     {
         deathCount += 1;
+        levelStartTime = Time.time; //we only want to record the time taken for sucessful rounds
     }
 
     private void OnSpecialAbility()
@@ -53,13 +54,20 @@ public class UserData : MonoBehaviour
     {
         Vector3 currPosition = player.transform.position;
         currPosition = new Vector3(Mathf.RoundToInt(currPosition.x), Mathf.RoundToInt(currPosition.y), Mathf.RoundToInt(currPosition.z));
-        playerPositions += Time.time - levelStartTime + "\t" + currPosition + "\n";
+        playerPositions += formatPositionString(Time.time - levelStartTime, currPosition);
+    }
+
+    private string formatPositionString(float time, Vector3 position)
+    {
+        return LevelManager.Level + "\t" + Mathf.RoundToInt(time) + "\t" + Mathf.RoundToInt(position.x)
+            + "\t" + Mathf.RoundToInt(position.y) + "\t" + Mathf.RoundToInt(position.z) + "\n";
     }
 
     IEnumerator RegisterData()
     {
         WWWForm form = new WWWForm();
-        form.AddField("username", DBManager.username);
+        form.AddField("username", DBManager.Username);
+        form.AddField("level", LevelManager.Level);
         form.AddField("timetocompletelevel", Mathf.RoundToInt(levelCompleteTime));
         form.AddField("deathcount", deathCount);
         form.AddField("specialabilitycount", specialAbilityCount);

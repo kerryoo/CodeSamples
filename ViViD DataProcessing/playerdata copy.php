@@ -7,15 +7,18 @@
 	}
 
 	$username = $POST["username"];
+	$level = $POST["level"];
+	$specialabilitycount = $_POST["specialabilitycount"];
 	$timetocompletelevel = $_POST["timetocompletelevel"];
 	$deathcount = $_POST["deathcount"];
-	$specialabilitycount = $_POST["specialabilitycount"];
 	$playerpositions = $_POST["playerpositions"];
 
-	$insertuserquery = "INSERT INTO playerdata (username, timetocompletelevel, deathcount, specialabilitycount, playerpositions) 
-	VALUES ('" . $username . "','" . $timetocompletelevel . "','" . $deathcount . "','" . $specialabilitycount . "'.'" . $playerpositions . ");";
+	$insertuserquery = "INSERT INTO playerdata (username, level, timetocompletelevel, deathcount, specialabilitycount, playerpositions) 
+	VALUES ('" . $username . "','" . $level . "','" . $specialabilitycount . "','" . 
+		$timetocompletelevel . "','" . $deathcount  . "'.'" . $playerpositions . ");";
+
 	mysqli_query($con, $insertuserquery) or die ("4: Insert player data query failed");
 
-	$updatequery = "UPDATE playerdata SET "
+	echo ("0");
 
  ?>

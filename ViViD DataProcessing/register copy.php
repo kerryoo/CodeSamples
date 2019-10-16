@@ -7,7 +7,7 @@
 	}
 
 	$username = $_POST["name"];
-	$password = $_Post["password"];
+	$password = $_POST["password"];
 
 	$namecheckquery = "SELECT name FROM players WHERE name='" . $username . "';"
 

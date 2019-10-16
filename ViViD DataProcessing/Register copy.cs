@@ -5,14 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class Register : MonoBehaviour
-{
-    public readonly int ID_BUFFER = 100000000;
-    public int ID;
+{ 
+    public InputField NameField;
+    public InputField PasswordField;
 
-    public InputField nameField;
-    public InputField passwordField;
-
-    public Button submitButton;
+    public Button SubmitButton;
 
     private void Start()
     {
@@ -33,9 +30,8 @@ public class Register : MonoBehaviour
     IEnumerator RegisterPlayer()
     {
         WWWForm form = new WWWForm();
-        form.AddField("name", nameField.text);
-        form.AddField("password", passwordField.text);
-        form.AddField("ID", ID_BUFFER + DBManager.registeredUsers);
+        form.AddField("name", NameField.text);
+        form.AddField("password", PasswordField.text);
 
         UnityWebRequest playerRegister = UnityWebRequest.Post("http://localhost/sqlconnect/register.php", form);
       
@@ -50,13 +46,13 @@ public class Register : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
 
-        DBManager.registeredUsers += 1;
+        DBManager.RegisteredUsers += 1;
 
     }
 
     public void VerifyInputs()
     {
-        submitButton.interactable = VerifyUserName(nameField.text) && VerifyPassword(nameField.text);
+        SubmitButton.interactable = VerifyUserName(NameField.text) && VerifyPassword(NameField.text);
     }
 
     //checks if it is between 8 and 20 characters and not repeating letters

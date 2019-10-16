@@ -5,11 +5,12 @@ using UnityEngine.Networking;
 
 public class DBManager : MonoBehaviour
 {
-    public static string username;
-    public static int score;
-    public static bool LoggedIn { get { return username != null; } }
+    public static string Username;
 
-    public static int registeredUsers;
+    public static int Score;
+    public static bool LoggedIn { get { return Username != null; } }
+
+    public static int RegisteredUsers;
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class DBManager : MonoBehaviour
 
     public static void LogOut()
     {
-        username = null;
+        Username = null;
     }
 
     private void CallGameDataUpdate()
@@ -30,7 +31,7 @@ public class DBManager : MonoBehaviour
     IEnumerator GameDataUpdate()
     {
         WWWForm form = new WWWForm();
-        form.AddField("registeredusers", registeredUsers);
+        form.AddField("registeredusers", RegisteredUsers);
         UnityWebRequest levelData = UnityWebRequest.Post("http://localhost/sqlconnect/gamedata.php", form);
 
         yield return levelData;
@@ -51,9 +52,8 @@ public class DBManager : MonoBehaviour
         yield return getGameData;
         string[] results = getGameData.downloadHandler.text.Split('\t');
 
-        registeredUsers = int.Parse(results[0]);
+        RegisteredUsers = int.Parse(results[0]);
     }
-
 
 
 }
