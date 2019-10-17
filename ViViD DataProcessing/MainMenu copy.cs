@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     {
         if (DBManager.LoggedIn)
         {
-            playerDisplay.text = "Player: " + DBManager.username;
+            playerDisplay.text = "Player: " + DBManager.Username;
         }
     }
 
